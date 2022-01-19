@@ -110,3 +110,55 @@ Reload Nginx to apply the changes:
 http://'Public-IP-Address':80
 <img width="1280" alt="website" src="https://user-images.githubusercontent.com/51254648/150063079-3718e9b2-09c8-43cf-87a0-a97903a78105.png">
 
+ 
+ ## STEP 5 – TESTING PHP WITH NGINX
+ Lets test it validate that Nginx can correctly hand .php files off to your PHP processor. we would create a test PHP file in your document root. Open a new file called info.php within your document root in your text editor:
+*sudo nano /var/www/projectLEMP/info.php*
+ Type or paste the following lines into the new file. This is valid PHP code that will return information about your server:
+ img
+ we can now access this page in the web browser by visiting the domain name or public IP address we’ve set up in your Nginx configuration file, followed by /info.php: http://44.201.223.110/info.php
+ img
+ 
+ it’s best to remove the file we created as it contains sensitive information about your PHP environment and our Ubuntu server. we can use rm to remove that file:
+ *sudo rm /var/www/your_domain/info.php*
+ 
+ 
+ ## STEP 6 – RETRIEVING DATA FROM MYSQL DATABASE WITH PHP (CONTINUED)
+ We will create a database named example_database and a user named example_user, but you can replace these names with different values. First, connect to the MySQL console using the root account: *sudo mysql*
+ 
+ To create a new database, run the following command from your MySQL console:
+
+*mysql> CREATE DATABASE `example_database`;*
+ 
+ Now you can create a new user and grant him full privileges on the database you have just created
+ *mysql>  CREATE USER 'first_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';*
+ img
+ 
+ Now we need to give this user permission over the example_database database:
+
+*mysql> GRANT ALL ON example_database.* TO 'first_user'@'%';*
+ img
+ 
+ confirm that we have access to the example_database database:
+ *mysql> SHOW DATABASES;*
+ img
+ 
+ create a test table named todo_list. From the MySQL console, run the following statement:
+ *CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT, content VARCHAR(255), PRIMARY KEY(item_id));*
+ Insert a few rows of content in the test table.
+ *mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");*
+ img
+ 
+ To confirm that the data was successfully saved to your table, run:
+  *mysql>  SELECT * FROM example_database.todo_list;*
+ img
+ 
+ create a PHP script that will connect to MySQL and query for your content. 
+ *nano /var/www/projectLEMP/todo_list.php*
+ Copy this content into your todo_list.php script:
+ img
+ Save and close the file when you are done editing.
+ 
+ we can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
+ http://'Public_domain_or_IP'/todo_list.php
+ 
