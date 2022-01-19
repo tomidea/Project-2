@@ -68,14 +68,20 @@ http://<Public-IP-Address>:80
   
   Create the root web directory for your_domain as follows:
   *sudo mkdir /var/www/projectLEMP*
- 
+
+ <img width="571" alt="root web directory" src="https://user-images.githubusercontent.com/51254648/150063062-be02e2c1-1ab1-40c7-972f-b007560d49ce.png">
+
  Assign ownership of the directory with the $USER environment variable
  
  *sudo chown -R $USER:$USER /var/www/projectLEMP*
+ 
+ 
  Open a new configuration file in Nginx’s sites-available directory using your preferred command-line editor.
  *sudo nano /etc/nginx/sites-available/projectLEMP*
  
+
  This will create a new blank file. Paste in the following bare-bones configuration:
+ <img width="495" alt="bare-bones configuration" src="https://user-images.githubusercontent.com/51254648/150063072-3ec5307e-c57f-4d42-bb9c-e9edcf4bad69.png">
 
 
 Activate your configuration by linking to the config file from Nginx’s sites-enabled directory:
@@ -83,14 +89,17 @@ Activate your configuration by linking to the config file from Nginx’s sites-e
 sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
  
  This will tell Nginx to use the configuration next time it is reloaded. You can test your configuration for syntax errors by typing:
- sudo nginx -t
+ *sudo nginx -t*
  
+ <img width="521" alt="check syntax" src="https://user-images.githubusercontent.com/51254648/150063077-0c1452c9-ce14-4b47-905a-59c37465a0ac.png">
+
  We also need to disable default Nginx host that is currently configured to listen on port 80, for this run:
 sudo unlink /etc/nginx/sites-enabled/default
 
 Reload Nginx to apply the changes:
 
-sudo systemctl reload nginx
+*sudo systemctl reload nginx*
+ <img width="559" alt="reload nginx" src="https://user-images.githubusercontent.com/51254648/150063081-4f1d9b34-d9e6-4dac-89ec-7c90f892f370.png">
   
  Create an index.html file in that location so that we can test that your new server block works as expected:
 
@@ -98,5 +107,6 @@ sudo systemctl reload nginx
  
  Now go to your browser and try to open your website URL using IP address:
 
-http://<Public-IP-Address>:80
+http://'Public-IP-Address':80
+<img width="1280" alt="website" src="https://user-images.githubusercontent.com/51254648/150063079-3718e9b2-09c8-43cf-87a0-a97903a78105.png">
 
