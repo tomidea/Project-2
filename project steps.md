@@ -99,6 +99,7 @@ sudo unlink /etc/nginx/sites-enabled/default
 Reload Nginx to apply the changes:
 
 *sudo systemctl reload nginx*
+ 
  <img width="559" alt="reload nginx" src="https://user-images.githubusercontent.com/51254648/150063081-4f1d9b34-d9e6-4dac-89ec-7c90f892f370.png">
   
  Create an index.html file in that location so that we can test that your new server block works as expected:
@@ -113,11 +114,16 @@ http://'Public-IP-Address':80
  
  ## STEP 5 – TESTING PHP WITH NGINX
  Lets test it validate that Nginx can correctly hand .php files off to your PHP processor. we would create a test PHP file in your document root. Open a new file called info.php within your document root in your text editor:
-*sudo nano /var/www/projectLEMP/info.php*
+
+ *sudo nano /var/www/projectLEMP/info.php*
  Type or paste the following lines into the new file. This is valid PHP code that will return information about your server:
- img
+ 
+ <img width="191" alt="PHP code" src="https://user-images.githubusercontent.com/51254648/150069327-d856d51f-633a-4c94-b0dd-e645b9b58cab.png">
+
  we can now access this page in the web browser by visiting the domain name or public IP address we’ve set up in your Nginx configuration file, followed by /info.php: http://44.201.223.110/info.php
- img
+ 
+ <img width="1280" alt="PHP default page" src="https://user-images.githubusercontent.com/51254648/150069336-7a42713c-1074-4326-b76e-b1ce403c4f2b.png">
+
  
  it’s best to remove the file we created as it contains sensitive information about your PHP environment and our Ubuntu server. we can use rm to remove that file:
  *sudo rm /var/www/your_domain/info.php*
@@ -125,6 +131,8 @@ http://'Public-IP-Address':80
  
  ## STEP 6 – RETRIEVING DATA FROM MYSQL DATABASE WITH PHP (CONTINUED)
  We will create a database named example_database and a user named example_user, but you can replace these names with different values. First, connect to the MySQL console using the root account: *sudo mysql*
+
+ <img width="564" alt="connect mysql" src="https://user-images.githubusercontent.com/51254648/150069347-05376687-555e-41c9-815a-6152f37a720a.png">
  
  To create a new database, run the following command from your MySQL console:
 
@@ -132,33 +140,50 @@ http://'Public-IP-Address':80
  
  Now you can create a new user and grant him full privileges on the database you have just created
  *mysql>  CREATE USER 'first_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';*
- img
+ 
+ <img width="655" alt="create user" src="https://user-images.githubusercontent.com/51254648/150069348-007616ad-c55d-4c28-a5a8-2d51d19097be.png">
+
  
  Now we need to give this user permission over the example_database database:
 
 *mysql> GRANT ALL ON example_database.* TO 'first_user'@'%';*
- img
+
+ <img width="499" alt="grant user permission" src="https://user-images.githubusercontent.com/51254648/150069349-a85ed520-53ba-49ce-89e3-2e16b61ab6f7.png">
  
  confirm that we have access to the example_database database:
  *mysql> SHOW DATABASES;*
- img
+
+ <img width="578" alt="show database" src="https://user-images.githubusercontent.com/51254648/150069351-855e807e-ce24-41cd-bd52-575367c2aec5.png">
+
  
  create a test table named todo_list. From the MySQL console, run the following statement:
  *CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT, content VARCHAR(255), PRIMARY KEY(item_id));*
+ <img width="876" alt="create todo table" src="https://user-images.githubusercontent.com/51254648/150069352-0b7dd298-c791-42ba-a3fd-c5fb088595f3.png">
+
+ 
  Insert a few rows of content in the test table.
  *mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");*
- img
+ 
+ <img width="740" alt="insert table content" src="https://user-images.githubusercontent.com/51254648/150069353-c8550f32-09c0-48dc-9d15-6e63dd5d8f0d.png">
  
  To confirm that the data was successfully saved to your table, run:
   *mysql>  SELECT * FROM example_database.todo_list;*
- img
+
+ <img width="366" alt="table output" src="https://user-images.githubusercontent.com/51254648/150069354-e7c87fc3-b432-4180-8f60-382d216e7124.png">
+
  
  create a PHP script that will connect to MySQL and query for your content. 
  *nano /var/www/projectLEMP/todo_list.php*
  Copy this content into your todo_list.php script:
- img
+
+ <img width="557" alt="php script" src="https://user-images.githubusercontent.com/51254648/150069356-62eb238a-1c2f-4e6a-9993-eebb169e33fa.png">
+
  Save and close the file when you are done editing.
  
  we can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
  http://'Public_domain_or_IP'/todo_list.php
  
+ <img width="457" alt="browser todo" src="https://user-images.githubusercontent.com/51254648/150069358-30371ff1-4d59-4ea4-ae0f-23fe8ba048a8.png">
+
+
+
